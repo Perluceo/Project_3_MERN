@@ -14,6 +14,11 @@ app.use(
 );
 app.use(bodyParser.json());
 
+// serve up static assets (on heroku)
+if (process.envnNODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
 // DB Config
 const db = require("./config/keys").mongoURI;
 // const db = process.env.PROD_MONGODB;
@@ -21,7 +26,8 @@ const db = require("./config/keys").mongoURI;
 // Connect to MongoDB
 mongoose
   .connect(
-    db,
+    // db,
+    (db || "mongodb://user1:password1@ds211368.mlab.com:11368/heroku_xxb72461"),
     { useNewUrlParser: true }
   )
   .then(() => console.log("MongoDB successfully connected"))
