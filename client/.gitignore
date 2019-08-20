@@ -9,8 +9,6 @@ keys.js
 # testing
 /coverage
 
-# production
-/build
 
 # misc
 
