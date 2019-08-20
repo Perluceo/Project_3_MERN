@@ -20,14 +20,13 @@ if (process.envnNODE_ENV === "production") {
 }
 
 // DB Config
-const db = require("./config/keys").mongoURI;
-// const db = process.env.PROD_MONGODB;
+// const db = require("./config/keys").mongoURI;
 
 // Connect to MongoDB
 mongoose
   .connect(
     // db,
-    (process.env.MONGODB_URI || "mongodb://user1:password1@ds211368.mlab.com:11368/heroku_xxb72461"),
+    "mongodb://user1:password1@ds211368.mlab.com:11368/heroku_xxb72461",
     { useNewUrlParser: true }
   )
   .then(() => console.log("MongoDB successfully connected"))
