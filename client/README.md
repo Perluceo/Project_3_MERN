@@ -1,4 +1,9 @@
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+This project is a MERN application with Passport utilizing Semantic UI for frontend styling.  The Book Club allows authenticated users to query books through Google Books API.  Users are able to create/edit profile, search/buy books on Google Play, create/delete personal discussion posts, like/dislike discussion (posts) from other users, delete personal discussion (posts), and save/delete books to bookshelf for later retrieval.
+
+Future developments will allow linking to social media accounts (Twitter, Facebook, Instagram, ect.) and allow Book Club Members to interact with eachother to create meetups for book discussions.
+
+
+
 
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
