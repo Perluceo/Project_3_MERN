@@ -19,6 +19,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
+// // Server static assets if in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('client/build'));
+}
+
 mongoose.connect("mongodb://localhost/project3db", { useNewUrlParser: true });
 // DB Config
 //const db = require('./config/keys').mongoURI;
