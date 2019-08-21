@@ -1,8 +1,8 @@
 {
     "workbench.colorCustomizations": {
-        "activityBar.background": "#23320C",
-        "titleBar.activeBackground": "#314611",
-        "titleBar.activeForeground": "#F7FBF0"
+        "activityBar.background": "#1A331B",
+        "titleBar.activeBackground": "#244826",
+        "titleBar.activeForeground": "#F8FCF8"
     },
-    "prettier.singleQuote": true
+    "eslint.enable": false
 }

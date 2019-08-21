@@ -1,52 +1,90 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { logoutUser } from "../../actions/authActions";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
+import { deleteAccount, getCurrentProfile } from '../../actions/profileActions';
+
+import Spinner from '../common/Spinner';
+import ProfileActions from './ProfileActions';
+import Books from './Books';
+
+import { Button, Grid } from 'semantic-ui-react';
 
 class Dashboard extends Component {
-  onLogoutClick = e => {
-    e.preventDefault();
-    this.props.logoutUser();
-  };
-render() {
-    const { user } = this.props.auth;
-return (
-      <div style={{ height: "75vh" }} className="container valign-wrapper">
-        <div className="row">
-          <div className="col s12 center-align">
-            <h4>
-              <b>Hey there,</b> {user.name.split(" ")[0]}
-              <p className="flow-text grey-text text-darken-1">
-                You are logged into UPTOWN Brunch Book Club{" "}
-                <span style={{ fontFamily: "monospace" }}>MERN</span> app
-              </p>
-            </h4>
-            <button
-              style={{
-                width: "150px",
-                borderRadius: "3px",
-                letterSpacing: "1.5px",
-                marginTop: "1rem"
-              }}
-              onClick={this.onLogoutClick}
-              className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-            >
-              Logout
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
+	state = { open: false };
+
+	open = () => this.setState({ open: true });
+	close = () => this.setState({ open: false });
+
+	UNSAFE_componentWillMount() {
+		this.props.getCurrentProfile();
+	}
+
+	onDelete = () => {
+		this.props.deleteAccount();
+	};
+
+	render() {
+		const { user } = this.props.auth;
+		const { profile, loading } = this.props.profile;
+
+		let dashboardContent;
+
+		if (profile === null || loading) {
+			dashboardContent = <Spinner />;
+		} else {
+			// Check if logged in user has profile data
+			if (Object.keys(profile).length > 0) {
+				dashboardContent = (
+					<div>
+						<h1>
+							Welcome:
+							<Link to={`/profile/${profile.username}`}>{user.name}</Link>
+						</h1>
+						<Grid stackable columns={3}>
+							<ProfileActions />
+
+							<Button basic color="red" onClick={this.onDelete}>
+								Delete My Account
+							</Button>
+						</Grid>
+						<br />
+						<Books books={profile.books} />
+					</div>
+				);
+			} else {
+				// User logged in but no profile
+				dashboardContent = (
+					<div>
+						<p>Please create your profile.</p>
+						<Link to="/create-profile"> Create Profile </Link>
+					</div>
+				);
+			}
+		}
+		return (
+			<div>
+				<h1>Dashboard</h1>
+				{dashboardContent}
+			</div>
+		);
+	}
 }
-Dashboard.propTypes = {
-  logoutUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
-};
-const mapStateToProps = state => ({
-  auth: state.auth
+
+const mapStateToProps = (state) => ({
+	profile: state.profile,
+	auth: state.auth
 });
+
+Dashboard.propTypes = {
+	getCurrentProfile: PropTypes.func.isRequired,
+	deleteAccount: PropTypes.func.isRequired,
+	auth: PropTypes.object.isRequired,
+	profile: PropTypes.object.isRequired
+};
+
 export default connect(
-  mapStateToProps,
-  { logoutUser }
+	mapStateToProps,
+	{ deleteAccount, getCurrentProfile }
 )(Dashboard);
