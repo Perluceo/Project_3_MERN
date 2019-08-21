@@ -19,13 +19,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-// // Server static assets if in production
-if (process.env.NODE_ENV === 'production') {
-  // Set static folder
-  app.use(express.static('client/build'));
-}
 
-mongoose.connect("mongodb://localhost/project3db", { useNewUrlParser: true });
+
+var mongo_URI = process.env.MONGODB_URI || "mongodb://localhost/project3db";
+
+mongoose.connect(mongo_URI, { useNewUrlParser: true });
 // DB Config
 //const db = require('./config/keys').mongoURI;
 // Connect to MongoDB
@@ -75,6 +73,12 @@ app.get('/api/books/:search', function (req, res) {
 //     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 //   });
 // }
+
+// // Server static assets if in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('client/build'));
+}
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
