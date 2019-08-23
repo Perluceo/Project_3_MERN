@@ -1,17 +1,3 @@
-# bookclubbers
+This project is a MERN application with Passport utilizing Semantic UI for frontend styling. The Book Club allows authenticated users to query books through Google Books API. Users are able to create/edit profile, search/buy books on Google Play, create/delete personal discussion posts, like/dislike discussion (posts) from other users, delete personal discussion (posts), and save/delete books to bookshelf for later retrieval.
 
-An app inspired from Brad Traversy's MERN Stack Front To Back: Full Stack React, Redux & Node.js on Udemy
-- Link: https://bookclubbers.herokuapp.com/login
-
-# Features 
-- Register and Login with passport-jwt
-- Search Google Books API with link to buy (no affiliation with Google)
-- Discussion section. Post, Comment, Like, Unlike
-- Save favorite books to a bookshelf
-- React-Semantic-UI to style.
-
-# ToDo
-- Drag and Drop feature to reorder bookshelf
-- Login using social media (Google, Facebook)
-- Open modal like feature to a preview of book
-
+Future developments will allow linking to social media accounts (Twitter, Facebook, Instagram, ect.) and allow Book Club Members to interact with eachother to create meetups for book discussions.
